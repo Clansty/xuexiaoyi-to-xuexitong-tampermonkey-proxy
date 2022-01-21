@@ -49,7 +49,8 @@ def search():
                 temp1 = q_options.split(option)[1]
                 # 切分选项以提取正确答案
                 for alpha in 'ABCDEF':
-                    if (len(temp2 := temp1.rsplit(f'{alpha} ')) > 1) | (alpha == 'F'):
+                    temp2 = temp1.rsplit(f'{alpha} ')
+                    if (len(temp2) > 1) | (alpha == 'F'):
                         answer_text.append(temp2[0].strip('．.、 '))
                         break
             # 多选题情况 选项之间补 '#'
@@ -94,8 +95,4 @@ def search():
         }
 
 if __name__ == '__main__':
-    socket_path = os.path.expanduser('~/.cache/xuexiaoyi.socket')
-    if os.path.exists(socket_path):
-        os.remove(socket_path)
-
-    app.run(socket_path)
+    app.run('0.0.0.0', 9000)
