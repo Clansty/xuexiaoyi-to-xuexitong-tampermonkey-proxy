@@ -1,5 +1,6 @@
 #!/bin/python3
 
+import os
 import requests
 import time
 from xuexiaoyi_pb2 import ReqOfSearch, RespOfSearch
@@ -92,4 +93,9 @@ def search():
             }
         }
 
-app.run('0.0.0.0',88)
+if __name__ == '__main__':
+    socket_path = os.path.expanduser('~/.cache/xuexiaoyi.socket')
+    if os.path.exists(socket_path):
+        os.remove(socket_path)
+
+    app.run(socket_path)
